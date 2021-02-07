@@ -60,7 +60,8 @@ impl StatementRP {
         let G: GE = ECPoint::generator();
         let label = BigInt::mod_sub(&init_seed, &BigInt::one(), &FE::q());
         let hash = HSha512::create_hash(&[&label]);
-        let H = generate_random_point(&Converter::to_vec(&hash));
+        let H = GE::one();
+            //generate_random_point(&Converter::to_vec(&hash));
 
         let g_vec = (0..nm)
             .map(|i| {
