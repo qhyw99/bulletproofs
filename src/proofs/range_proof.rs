@@ -21,8 +21,8 @@ use curv::cryptographic_primitives::hashing::hash_sha256::HSha256;
 use curv::cryptographic_primitives::hashing::traits::*;
 use curv::elliptic::curves::traits::*;
 use curv::BigInt;
-type GE = curv::elliptic::curves::bls12_381::GE;
-type FE = curv::elliptic::curves::bls12_381::FE;
+type GE = curv::elliptic::curves::curve_ristretto::GE;
+type FE = curv::elliptic::curves::curve_ristretto::FE;
 
 use itertools::iterate;
 use proofs::inner_product::InnerProductArg;
@@ -759,8 +759,8 @@ mod tests {
     use curv::cryptographic_primitives::hashing::traits::*;
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    type GE = curv::elliptic::curves::bls12_381::GE;
-type FE = curv::elliptic::curves::bls12_381::FE;
+    type GE = curv::elliptic::curves::curve_ristretto::GE;
+type FE = curv::elliptic::curves::curve_ristretto::FE;
 
     use proofs::range_proof::generate_random_point;
     use proofs::range_proof::RangeProof;

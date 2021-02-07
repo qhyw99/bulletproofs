@@ -30,8 +30,8 @@ mod bench_range_proof {
     use curv::cryptographic_primitives::hashing::traits::*;
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    type GE = curv::elliptic::curves::bls12_381::GE;
-    type FE = curv::elliptic::curves::bls12_381::FE;
+    type GE = curv::elliptic::curves::curve_ristretto::GE;
+    type FE = curv::elliptic::curves::curve_ristretto::FE;
 
     static AGGREGATION_SIZES: [usize; 6] = [1, 2, 4, 8, 16, 32];
 
@@ -913,8 +913,8 @@ mod bench_wip_range_proof {
     use curv::arithmetic::traits::{Samplable};
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    use curv::elliptic::curves::bls12_381::GE;
-    use curv::elliptic::curves::bls12_381::FE;
+    use curv::elliptic::curves::curve_ristretto::GE;
+    use curv::elliptic::curves::curve_ristretto::FE;
 
     static AGGREGATION_SIZES: [usize; 6] = [1, 2, 4, 8, 16, 32];
 
@@ -1408,6 +1408,6 @@ mod bench_wip_range_proof {
 
 //fn main() {}
 criterion_main!(
-    bench_range_proof::range_proof,
+    //bench_range_proof::range_proof,
     bench_wip_range_proof::wip_range_proof,
 );

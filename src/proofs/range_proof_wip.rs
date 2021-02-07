@@ -28,8 +28,8 @@ use curv::cryptographic_primitives::hashing::hash_sha512::HSha512;
 use curv::cryptographic_primitives::hashing::traits::*;
 use curv::elliptic::curves::traits::*;
 use curv::BigInt;
-type GE = curv::elliptic::curves::bls12_381::GE;
-type FE = curv::elliptic::curves::bls12_381::FE;
+type GE = curv::elliptic::curves::curve_ristretto::GE;
+type FE = curv::elliptic::curves::curve_ristretto::FE;
 
 use itertools::iterate;
 use proofs::range_proof::generate_random_point;
@@ -60,9 +60,8 @@ impl StatementRP {
         let G: GE = ECPoint::generator();
         let label = BigInt::mod_sub(&init_seed, &BigInt::one(), &FE::q());
         let hash = HSha512::create_hash(&[&label]);
-        let H = GE::identity();
-            //generate_random_point(&Converter::to_vec(&hash));
-
+        let H = generate_random_point(&Converter::to_vec(&hash));
+        // GE::identity();
         let g_vec = (0..nm)
             .map(|i| {
                 let kzen_label_i = BigInt::from(i as u32) + init_seed;
@@ -603,8 +602,8 @@ mod tests {
     use curv::arithmetic::traits::Samplable;
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    type GE = curv::elliptic::curves::bls12_381::GE;
-type FE = curv::elliptic::curves::bls12_381::FE;
+    type GE = curv::elliptic::curves::curve_ristretto::GE;
+type FE = curv::elliptic::curves::curve_ristretto::FE;
 
     use proofs::range_proof_wip::{RangeProofWIP, StatementRP};
 
