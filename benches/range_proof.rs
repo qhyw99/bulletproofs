@@ -99,7 +99,7 @@ mod bench_range_proof {
         );
     }
 
-    pub fn bench_range_proof_16_2(c: &mut Criterion) {
+    pub fn bench_range_proof_17_2(c: &mut Criterion) {
         c.bench_function("range proof, n=16, m=2", move |b| {
             let n = 16;
             // num of proofs
@@ -889,7 +889,7 @@ mod bench_range_proof {
     name = range_proof;
     config = Criterion::default().sample_size(10);
     targets =
-    bench_range_proof_16_2,
+    bench_range_proof_17_2,
     create_range_proof_16_2,
     verify_range_proof_16_2,
     fast_verify_range_proof_16_2,
@@ -1408,6 +1408,6 @@ mod bench_wip_range_proof {
 
 //fn main() {}
 criterion_main!(
-    //bench_range_proof::range_proof,
-    bench_wip_range_proof::wip_range_proof,
+    bench_range_proof::range_proof,
+    //bench_wip_range_proof::wip_range_proof,
 );
