@@ -21,11 +21,12 @@ use curv::cryptographic_primitives::hashing::hash_sha256::HSha256;
 use curv::cryptographic_primitives::hashing::traits::*;
 use curv::elliptic::curves::traits::*;
 use curv::BigInt;
-type GE = curv::elliptic::curves::curve_ristretto::GE;
-type FE = curv::elliptic::curves::curve_ristretto::FE;
+type GE = curv::elliptic::curves::integer_group::GE;
+type FE = curv::elliptic::curves::integer_group::FE;
 
 
 use Errors::{self, InnerProductError};
+use std::borrow::Borrow;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct InnerProductArg {
@@ -325,7 +326,7 @@ impl InnerProductArg {
         let tot_len = points.len();
 
         let expect_P = (0..tot_len)
-            .map(|i| points[i] * &ECScalar::from(&scalars[i]))
+            .map(|i| points[i].borrow() * &ECScalar::from(&scalars[i]))
             .fold(ux_c, |acc, x| acc + x as GE);
 
         if *P == expect_P {
@@ -358,8 +359,8 @@ mod tests {
     use curv::cryptographic_primitives::hashing::traits::*;
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    use curv::elliptic::curves::curve_ristretto::GE;
-    use curv::elliptic::curves::curve_ristretto::FE;
+    use curv::elliptic::curves::integer_group::GE;
+    use curv::elliptic::curves::integer_group::FE;
     use proofs::inner_product::InnerProductArg;
     use proofs::range_proof::generate_random_point;
 

@@ -30,8 +30,8 @@ mod bench_range_proof {
     use curv::cryptographic_primitives::hashing::traits::*;
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    type GE = curv::elliptic::curves::curve_ristretto::GE;
-    type FE = curv::elliptic::curves::curve_ristretto::FE;
+    type GE = curv::elliptic::curves::integer_group::GE;
+    type FE = curv::elliptic::curves::integer_group::FE;
 
     static AGGREGATION_SIZES: [usize; 6] = [1, 2, 4, 8, 16, 32];
 
@@ -913,8 +913,8 @@ mod bench_wip_range_proof {
     use curv::arithmetic::traits::{Samplable};
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    use curv::elliptic::curves::curve_ristretto::GE;
-    use curv::elliptic::curves::curve_ristretto::FE;
+    use curv::elliptic::curves::integer_group::GE;
+    use curv::elliptic::curves::integer_group::FE;
 
     static AGGREGATION_SIZES: [usize; 6] = [1, 2, 4, 8, 16, 32];
 
@@ -930,8 +930,8 @@ mod bench_wip_range_proof {
                 let stmt = StatementRP::generate_bases(&kzen_label, m, n);
         
                 // generate witness
-                let G = stmt.G;
-                let H = stmt.H;
+                let G = stmt.G.clone();
+                let H = stmt.H.clone();
                 let range = BigInt::from(2).pow(n as u32);
                 let v_vec = (0..m)
                     .map(|_| ECScalar::from(&BigInt::sample_below(&range)))
@@ -971,8 +971,8 @@ mod bench_wip_range_proof {
             let stmt = StatementRP::generate_bases(&kzen_label, m, n);
     
             // generate witness
-            let G = stmt.G;
-            let H = stmt.H;
+            let G = stmt.G.clone();
+            let H = stmt.H.clone();
             let range = BigInt::from(2).pow(n as u32);
             let v_vec = (0..m)
                 .map(|_| ECScalar::from(&BigInt::sample_below(&range)))
@@ -1034,8 +1034,8 @@ mod bench_wip_range_proof {
             let stmt = StatementRP::generate_bases(&kzen_label, m, n);
     
             // generate witness
-            let G = stmt.G;
-            let H = stmt.H;
+            let G = stmt.G.clone();
+            let H = stmt.H.clone();
             let range = BigInt::from(2).pow(n as u32);
             let v_vec = (0..m)
                 .map(|_| ECScalar::from(&BigInt::sample_below(&range)))
@@ -1098,8 +1098,8 @@ mod bench_wip_range_proof {
             let stmt = StatementRP::generate_bases(&kzen_label, m, n);
     
             // generate witness
-            let G = stmt.G;
-            let H = stmt.H;
+            let G = stmt.G.clone();
+            let H = stmt.H.clone();
             let range = BigInt::from(2).pow(n as u32);
             let v_vec = (0..m)
                 .map(|_| ECScalar::from(&BigInt::sample_below(&range)))
@@ -1162,8 +1162,8 @@ mod bench_wip_range_proof {
             let stmt = StatementRP::generate_bases(&kzen_label, m, n);
     
             // generate witness
-            let G = stmt.G;
-            let H = stmt.H;
+            let G = stmt.G.clone();
+            let H = stmt.H.clone();
             let range = BigInt::from(2).pow(n as u32);
             let v_vec = (0..m)
                 .map(|_| ECScalar::from(&BigInt::sample_below(&range)))
@@ -1226,8 +1226,8 @@ mod bench_wip_range_proof {
             let stmt = StatementRP::generate_bases(&kzen_label, m, n);
     
             // generate witness
-            let G = stmt.G;
-            let H = stmt.H;
+            let G = stmt.G.clone();
+            let H = stmt.H.clone();
             let range = BigInt::from(2).pow(n as u32);
             let v_vec = (0..m)
                 .map(|_| ECScalar::from(&BigInt::sample_below(&range)))
@@ -1290,8 +1290,8 @@ mod bench_wip_range_proof {
             let stmt = StatementRP::generate_bases(&kzen_label, m, n);
     
             // generate witness
-            let G = stmt.G;
-            let H = stmt.H;
+            let G = stmt.G.clone();
+            let H = stmt.H.clone();
             let range = BigInt::from(2).pow(n as u32);
             let v_vec = (0..m)
                 .map(|_| ECScalar::from(&BigInt::sample_below(&range)))
@@ -1354,8 +1354,8 @@ mod bench_wip_range_proof {
             let stmt = StatementRP::generate_bases(&kzen_label, m, n);
     
             // generate witness
-            let G = stmt.G;
-            let H = stmt.H;
+            let G = stmt.G.clone();
+            let H = stmt.H.clone();
             let range = BigInt::from(2).pow(n as u32);
             let v_vec = (0..m)
                 .map(|_| ECScalar::from(&BigInt::sample_below(&range)))

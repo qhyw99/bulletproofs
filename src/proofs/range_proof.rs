@@ -21,8 +21,8 @@ use curv::cryptographic_primitives::hashing::hash_sha256::HSha256;
 use curv::cryptographic_primitives::hashing::traits::*;
 use curv::elliptic::curves::traits::*;
 use curv::BigInt;
-type GE = curv::elliptic::curves::curve_ristretto::GE;
-type FE = curv::elliptic::curves::curve_ristretto::FE;
+type GE = curv::elliptic::curves::integer_group::GE;
+type FE = curv::elliptic::curves::integer_group::FE;
 
 use itertools::iterate;
 use proofs::inner_product::InnerProductArg;
@@ -714,20 +714,20 @@ impl RangeProof {
         let mut points: Vec<GE> = Vec::with_capacity(2 * nm + 2 * lg_nm + m + 6);
         points.extend_from_slice(g_vec);
         points.extend_from_slice(h_vec);
-        points.push(*G);
+        points.push(G.clone());
         // points.push(*H);
         // points.push(self.A);
-        points.push(self.S);
+        points.push(self.S.clone());
         points.extend_from_slice(&self.inner_product_proof.L);
         points.extend_from_slice(&self.inner_product_proof.R);
         points.extend_from_slice(&ped_com);
-        points.push(self.T1);
-        points.push(self.T2);
+        points.push(self.T1.clone());
+        points.push(self.T2.clone());
 
         let H_times_scalar_H = H * &ECScalar::from(&scalar_H);
         let tot_len = points.len();
         let lhs = (0..tot_len)
-            .map(|i| points[i] * &ECScalar::from(&scalars[i]))
+            .map(|i| points[i].clone() * &ECScalar::from(&scalars[i]))
             .fold(H_times_scalar_H, |acc, x| acc + x as GE);
 
         // single multi-exponentiation check
@@ -759,8 +759,8 @@ mod tests {
     use curv::cryptographic_primitives::hashing::traits::*;
     use curv::elliptic::curves::traits::*;
     use curv::BigInt;
-    type GE = curv::elliptic::curves::curve_ristretto::GE;
-type FE = curv::elliptic::curves::curve_ristretto::FE;
+    type GE = curv::elliptic::curves::integer_group::GE;
+type FE = curv::elliptic::curves::integer_group::FE;
 
     use proofs::range_proof::generate_random_point;
     use proofs::range_proof::RangeProof;
